@@ -1,0 +1,178 @@
+  <!-- Navbar -->
+  <%- include('header'); %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%- include('sidebar'); %>
+
+  <!-- /.sidebar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">View Blog</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="/blog-edit?id=<%= blog._id%>" class="btn bg-gradient-secondary">Edit</a>
+
+            </li>
+            </ol>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <form method="POST" action="/addBlog" enctype="multipart/form-data" id="blogview">
+            <div class="card-body">
+            <div class="form-group row">
+              <div class="form-group">
+              <div class="col-md-3">
+                <label for="exampleInputEmail1">Blog Language*</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" id="statusLan1" name="blogLanguage" value="1" <%=blog.blogLanguage=='1'?'checked':''%> readonly>
+                <label for="statusLan1" class="custom-control-label">English</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" id="statusLan2" name="blogLanguage" value="2" <%=blog.blogLanguage=='2'?'checked':''%> readonly>
+                <label for="statusLan2" class="custom-control-label">Chinese</label>
+              </div>
+            </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputBlogAuthor">Author *</label>
+                <input class="form-control" id="inputBlogAuthor" value="<%= blog.author%>" type="text" placeholder="Enter Blog Author" name="author">
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputBlogCategory">Blog Category *</label>                  
+                   <select class="form-control tagging" id="inputBlogCategory" name="category" >
+                    <!-- <select class="form-control" id="inputBlogCategory" name="category"> -->
+                         <option value="0" ><%= blog.category.categoryName%></option>
+                    </select>           
+              </div>
+
+            </div>
+            <div class="form-group ">
+            <div class="form-group row">
+                <label for="inputBlogTitle">Title *</label>
+                <input type="text" class="form-control" value="<%= blog.title%>" id="inputBlogTitle" placeholder="Enter Blog Title" name="title">
+              </div>
+            </div>
+             <!-- tile image-->
+             <div class="form-group">
+              <div class="form-group row">
+
+                  <label for="titleImage">Title Image *</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="titleImage" name="titleImage" />
+  
+                      <!-- <input type="file" class="custom-file-input" id="titleImage" accept="image/jpg,image/jpeg,image/png,image/bmp" name="titleImage"> -->
+                      <label class="custom-file-label" for="titleImage">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                   <!-- <button type="submit" class="btn bg-gradient-success">Upload</button> -->
+                   <a href='http://locahost:3000/upload'>
+                     <span class="input-group-text">Upload</span>
+                     </a>
+                    </div>
+                  </div>
+                  
+                  <img  src="/<%= blog.titleImage%>" alt="Not found" style="width:50px" hspace="20" vspace="20">
+                  
+                </div>
+  
+              </div>
+            <div class="form-group ">
+                <div class="form-group row">
+                    <label for="inputBlogDescription">Description *</label>
+                    <input type="text" value="<%= blog.description%>" class="form-control" id="inputBlogDescription" placeholder="Enter Blog Description" name="description">
+                  </div>
+                </div>
+                <div class="form-group ">
+                        <!-- <label for="inputBlogContent">Content *</label> -->
+                        <textarea id="summernote" name="content" class="form-control">
+                            <%= blog.content%>
+                        </textarea>
+                        <!-- <input type="text" class="form-control" id="inputBlogContent" placeholder="Enter Blog Content" name="content"> -->
+                     
+                    </div>
+            <div class="form-group row">
+                    <div class="form-group col-md-4 ">
+                        <label for="inputBlogSlug">Slug *</label>
+                        <input type="text" value="<%= blog.slug%>" class="form-control" id="inputBlogSlug" placeholder="Enter Blog Slug" name="slug">
+                      </div>
+                      <div class="form-group col-md-4 ">
+                        <label for="inputBlogTimeDuration">Time Duration To Read *</label>
+                        <input type="text" value="<%= blog.timeDurationToRead%>" class="form-control" id="inputBlogTimeDuration" placeholder="e.g. 20 Mins" name="timeDurationToRead">
+                      </div>
+                </div>
+                <div class="form-group required" id="blogStatusMain">   
+                    <label>Blog Status *</label>
+                    <div class="custom-control custom-radio custom-control-inline" id="blogStatusMain">
+                        <input type="radio" id="status1" name="blogStatus" class="custom-control-input" value="1" <%=blog.blogStatus=='1'?'checked':''%>>
+                        <label class="custom-control-label status-radio" for="status1">Active</label>
+                    </div>
+                   
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="status0" name="blogStatus" class="custom-control-input" value="0" <%=blog.blogStatus=='0'?'checked':''%>>
+                        <label class="custom-control-label status-radio" for="status0">Inactive</label>
+                    </div>
+                </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gridCheck" name="isFeatured" value="true" <%=blog.isFeatured==true?'checked':''%> onclick="return false" >
+                <label class="form-check-label" for="gridCheck">This is a featured blog</label>
+              </div>
+               
+            </div>
+           
+            <!-- /.card-body -->
+
+           
+          </form>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+<!--footer start-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  function pageload() {
+    var x = document.getElementById("change-link").innerHTML="View";
+    
+  }
+  window.onload=pageload;
+  </script>
+<script>
+$(document).ready(function() {
+    $('#blogview').find('input, textarea, select').attr('readonly', 'readonly');
+    $(':radio:not(:checked)').attr('disabled', true);
+    $('#summernote').summernote('disable');
+    
+    document.getElementById("titleImage").disabled = true;
+});
+
+</script>
+
+<%- include('footer'); %>
+
+
+
+<!--/footer end-->
+  
+ 

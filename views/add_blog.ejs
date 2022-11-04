@@ -1,0 +1,260 @@
+  <!-- Navbar -->
+  <%- include('header'); %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%- include('sidebar'); %>
+
+  <!-- /.sidebar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Add Blog</h1>
+          </div><!-- /.col -->
+          
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <form method="POST" action="/addBlog" enctype="multipart/form-data">
+            <div class="card-body">
+            <div class="form-group row">
+              <div class="form-group">
+              <div class="col-md-3">
+                <label for="exampleInputEmail1">Blog Language*</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" id="statusLan1" name="blogLanguage" value="1">
+                <label for="statusLan1" class="custom-control-label">English</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" id="statusLan2" name="blogLanguage" value="2">
+                <label for="statusLan2" class="custom-control-label">Chinese</label>
+              </div>
+            </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputBlogAuthor">Author *</label>
+                <input class="form-control" id="inputBlogAuthor" type="text" placeholder="Enter Blog Author" name="author">
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputBlogCategory">Blog Category *</label>                  
+                   <select class="form-control tagging" id="inputBlogCategory" name="category" >
+                    <!-- <select class="form-control" id="inputBlogCategory" name="category"> -->
+                         <option value="0" >Select Category</option>
+                    </select>           
+              </div>
+
+            </div>
+            <div class="form-group ">
+            <div class="form-group row">
+                <label for="inputBlogTitle">Title *</label>
+                <input type="text" class="form-control" id="inputBlogTitle" placeholder="Enter Blog Title" name="title">
+              </div>
+            </div>
+             <!-- tile image-->
+             <div class="form-group">
+                  <label for="titleImage">Title Image *</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="titleImage" name="titleImage" />
+  
+                      <!-- <input type="file" class="custom-file-input" id="titleImage" accept="image/jpg,image/jpeg,image/png,image/bmp" name="titleImage"> -->
+                      <label class="custom-file-label" for="titleImage"id="filename" >Choose file</label>
+                    </div>
+                    <!-- <div class="input-group-append">
+                  <button type="submit" class="btn bg-gradient-success">Upload</button>
+                   <a href='http://locahost:3000/upload'>
+                     <span class="input-group-text">Upload</span>
+                     </a>
+                    </div> -->
+                  </div>
+            
+  
+              </div>
+            <div class="form-group ">
+                <div class="form-group row">
+                    <label for="inputBlogDescription">Description *</label>
+                    <input type="text" class="form-control" id="inputBlogDescription" placeholder="Enter Blog Description" name="description">
+                  </div>
+                </div>
+                <div class="form-group ">
+                        <!-- <label for="inputBlogContent">Content *</label> -->
+                        <textarea id="summernote" name="content" class="form-control">
+                         
+                        </textarea>
+                        <!-- <input type="text" class="form-control" id="inputBlogContent" placeholder="Enter Blog Content" name="content"> -->
+                     
+                    </div>
+            <div class="form-group row">
+                    <div class="form-group col-md-4 ">
+                        <label for="inputBlogSlug">Slug *</label>
+                        <input type="text" class="form-control" id="inputBlogSlug" placeholder="Enter Blog Slug" name="slug">
+                      </div>
+                      <div class="form-group col-md-4 ">
+                        <label for="inputBlogTimeDuration">Time Duration To Read *</label>
+                        <input type="text" class="form-control" id="inputBlogTimeDuration" placeholder="e.g. 20 Mins" name="timeDurationToRead">
+                      </div>
+                </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gridCheck" name="isFeatured" value="true">
+                <label class="form-check-label" for="gridCheck">This is a featured blog</label>
+              </div>
+             
+            </div>
+            <div class="form-group row">
+                <div class="form-group col-md-1">
+            <button type="button" class="btn btn-block bg-gradient-danger">Cancel</button>
+                   
+                </div>
+                  <div class="form-group col-md-1">
+            <button type="submit" class="btn btn-block bg-gradient-success">Add</button>
+                    
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+           
+          </form>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+<!--footer start-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  function pageload() {
+    var x = document.getElementById("change-link").innerHTML="Add-blog";
+    
+  }
+  window.onload=pageload;
+  </script>
+  <script>
+    document.getElementById("titleImage").onchange = function() {
+      var filenm = document.getElementById("titleImage").value;
+      console.log(filenm);
+      var file_nm = filenm.replace(/C:\\fakepath\\/i, '');
+      var y = document.getElementById("filename").innerHTML=file_nm;
+    
+    };
+    
+      </script>
+<script>
+  // from blog view 
+  $('input[name=blogLanguage]').change(function(){
+      var value = $( 'input[name=blogLanguage]:checked' ).val();
+      var languageSet = localStorage.setItem("blog_language", value);
+      console.log("set input blog lan blogfields:", value);
+  });
+</script>
+
+<script>
+   $(document).ready(()=>{
+      var getLan = localStorage.getItem("blog_language");
+      console.log("doc ready getlan blogfields:", getLan);
+      if(getLan ==1 ){
+          $('input:radio[id="statusLan1"]').attr('checked', 'checked');
+      }else{
+          $('input:radio[id="statusLan2"]').attr('checked', 'checked');
+      }
+      getAndSetBlogCategoryList(); 
+
+  }) 
+</script>
+
+<script>
+   var a = window.location.pathname;
+  console.log("path name a:", a);
+  if(a == '/add-blog'){
+      $('input[name=blogLanguage]').change(function(){
+          var value = $( 'input[name=blogLanguage]:checked' ).val();
+          var languageSet = localStorage.setItem("blog_language", value);
+          console.log("set laguage from window location:", languageSet);
+          setTimeout(()=>{
+              window.location.reload();
+              cosole.log("reload");
+          },200);
+      });
+  } 
+ 
+</script>
+
+<script>
+    const resetSelectOptions = (tagId) => {
+        const selectTag = $(`#${tagId}`);
+        const firstOption = selectTag.find('option[value="0"]');
+        selectTag.empty().append(firstOption);
+    }
+ const getAndSetBlogCategoryList = (blogCategoryId) => {
+        $.ajax({    
+            url: `/allblogcategory`,
+            type: "GET",
+            headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+            success: function (data) {
+                 console.log('data > ', data);
+                 var list = data;
+                console.log(list);
+
+                setBlogCategoryDataInSelectOption(blogCategoryId, data);
+
+            },
+            error: function (error) {
+                console.log('Error', error, error.responseJSON);
+                if (error.responseJSON && error.responseJSON.message || error.responseJSON.msg) {
+                    const errorMsg = error.responseJSON.message || error.responseJSON.msg;
+                    showErrorPopup(errorMsg);
+                }
+            }
+        });
+    }
+
+const setBlogCategoryDataInSelectOption = async (blogCategoryId, allBlogCategoryList) => {
+  
+
+ 
+        console.log("all blog catregory:", allBlogCategoryList);
+
+        
+        const languageId = localStorage.getItem("blog_language");
+        console.log("LanguageId:", languageId);
+        // set blogCategory in select options            
+        resetSelectOptions('inputBlogCategory');
+         allBlogCategoryList.forEach(oc => {
+            console.log("for each oc log:", oc.language);
+            //console.log("in all blog category list");
+            if(oc.language == languageId && oc.categoryStatus == 1){
+                $('#inputBlogCategory').append(`<option value='${oc._id}' >${oc.categoryName}</option>`)
+                //console.log("in select blog category");
+            }
+        }) 
+
+       // if(blogCategoryId) $('#inputBlogCategory').val(blogCategoryId.toString());
+        
+    }
+
+
+
+   
+</script>
+
+<%- include('footer'); %>
+
+
+
+<!--/footer end-->
+  
+ 
