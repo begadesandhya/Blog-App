@@ -1,16 +1,10 @@
-const axios = require('axios');
 const bcrypt = require('bcrypt');
-//const nodemailer = require("nodemailer");
 const Admin = require('../model/admin');
 const jwt = require('jsonwebtoken');
 
 exports.HomeRoute = (req,res)=>{
     res.render('login');
 }
-
-
-
-
 
 
 exports.log_in = async(req, res)=>{
@@ -21,6 +15,7 @@ exports.log_in = async(req, res)=>{
             return;
         }
          const AdminLogin = await Admin.findOne({email: email});
+         console.log(AdminLogin.password);
         if(AdminLogin){
             const passMatch = await bcrypt.compare(password, AdminLogin.password);
             const name = AdminLogin.name
@@ -32,7 +27,7 @@ exports.log_in = async(req, res)=>{
                 expires: new Date(Date.now() + 2589200000),
                 httpOnly:true
             });
-
+            console.log(passMatch);
             if(!passMatch){
                 res.json({message:"wrong password"});
                 console.log("wrong password");

@@ -17,11 +17,4 @@ route.delete('/delete-blog/:id',controller.delete);
 route.get('/detail-blog',controller.detailblog);
 route.get('/detail-blogs',controller.blogwithcategory);
 
-
-
-
-//route.get('/api/users',controller.find);
-
-
-
 module.exports = route;

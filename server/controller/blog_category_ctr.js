@@ -15,7 +15,6 @@ exports.create = (req, res) => {
         //res.send(data)
         res.redirect('/blog-category');
         console.log('category created');
-        //return res.status(201).json({ error: "user register"});
     })
     .catch(err => {
         res.status(500).send({
@@ -48,7 +47,6 @@ exports.find = (req, res) =>{
 }
 
 exports.update=(req, res)=>{
-    console.log("in update");
     if(!req.body){
         return res
         .status(400)

@@ -1,6 +1,22 @@
 var Admin = require('../model/admin');
 require('../database/connection');
 
+
+exports.defaultAdminCreate = async () => {
+    const email = "admin@gmail.com";
+    const currentAdmin = await Admin.findOne({ email });
+    if (currentAdmin && Object.keys(currentAdmin).length > 0) return;
+
+    const adminObj = {
+        email,
+        password: "Admin@123",
+        name: "super admin",
+    }
+    const newAdmin = new Admin(adminObj)
+    await newAdmin.save();
+    console.log('Super admin created');
+}
+
 exports.create = (req, res) => {
     if(!req.body){
         res.status(400).send({message:"Content can not be empty"});
@@ -23,7 +39,6 @@ exports.create = (req, res) => {
         admin.save().then(data => {
         //res.send(data)
         res.redirect('/');
-        //return res.status(201).json({ error: "user register"});
     })
     .catch(err => {
         res.status(500).send({
@@ -32,7 +47,5 @@ exports.create = (req, res) => {
     });
     }).catch(err => {console.log(err);});  
 }
-
-
 
 

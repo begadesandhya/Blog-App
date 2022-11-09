@@ -29,7 +29,6 @@ exports.create = (req, res) => {
         blog.save().then(data => {
         //res.send(data)
         res.redirect('/blog-list');
-        //return res.status(201).json({ error: "user register"});
     })
     .catch(err => {
         res.status(500).send({

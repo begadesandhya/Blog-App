@@ -307,21 +307,9 @@ const setBlogCategoryDataInSelectOption = async (blogCategoryId, allBlogCategory
   
   $.ajax(request).done(function(response){
     console.log("data updated");
-    //swal("successfully updated");
-    
-    /* var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-    Toast.fire({
-        icon: 'success',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
- */
+
     swal({
-      title: 'Success!',
+      title: 'Updated!',
       type: 'success',
       toast: true,
       html: response.message,

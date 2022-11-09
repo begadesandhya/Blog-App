@@ -7,7 +7,6 @@ require('../database/connection');
 exports.find = (req, res) =>{
     if(req.query.id){
         const id = req.query.id;
-        console.log("thi si id" + id);
         Allblog.findById(id)
         .populate('category')
         .exec()
@@ -45,44 +44,37 @@ exports.find = (req, res) =>{
 
 exports.update=(req, res)=>{
     const id = req.params.id;
-
-    console.log("in update");
     if(!req.body){
         return res
         .status(400)
         .send({message:"field can not be empty"})
     }
     if(!req.file){
-        console.log("req body");
-
     console.log(req.body);
     Allblog.findByIdAndUpdate(id, {$set:req.body})
     .then(data=>{
         if(!data){
-            res.status(404).send({message:"cannot update user"});
+            res.status(404).send({message:"cannot update blog"});
         }else{
+            //res.redirect('/blog-list');
             res.send(data);
         }
     })
     .catch(err => {
-        res.status(500).send({message:"error update user"})
+        res.status(500).send({message:"error update blog"})
     })
     }else{
-    console.log("req file");
-    console.log(req.file);
-    console.log("req body");
-
-    console.log(req.body);
+    
     Allblog.findByIdAndUpdate(id, {$set:req.body, "titleImage":req.file.filename})
     .then(data=>{
         if(!data){
-            res.status(404).send({message:"cannot update user"});
+            res.status(404).send({message:"cannot update blog"});
         }else{
             res.send(data);
         }
     })
     .catch(err => {
-        res.status(500).send({message:"error update user"})
+        res.status(500).send({message:"error update blog"})
     })
 }
 }
@@ -128,7 +120,6 @@ exports.detailblog=(req, res)=>{
 
 exports.blogwithcategory=(req, res)=>{
     const id = req.query.id;
-        console.log("thi si id" + id);
         Allblog.findById(id)
         .populate('category')
         .exec()

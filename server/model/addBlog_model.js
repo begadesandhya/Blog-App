@@ -19,7 +19,6 @@ const blogSchema = new mongoose.Schema({
     },
      titleImage: {
         type: String,
-        // required: true,
     }, 
     description: {
         type: String,
@@ -29,10 +28,6 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // url: {
-    //     type: String,
-    //     
-    // },
     slug: {
         type: String,
         required: true,
